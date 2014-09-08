@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title i18n-content="optionsPageTitle">OpenID Options.</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/Resources/CSS/chrome_shared.css"/>
+	<link rel="stylesheet" href="/Resources/CSS/uber_frame.css"/>
+	<link rel="stylesheet" href="/Resources/CSS/Options.css"/>
+</head>
+<body class="uber-frame" style="font-family: 'Lucida Grande', sans-serif; font-size: 75%;">
+<div id="navigation">
+	<h1 i18n-content="extensionName">OpenID</h1>
+</div>
+<div class="page">
+	<header>
+		<h1 i18n-content="optionsTitle">Options</h1>
+	</header>
+	<section>
+		<p>
+			Login using OpenID by clicking the OpenID icon in the addressbar:
+		</p>
+
+		<p>
+			<img class="inlineicon" alt="" src="/Resources/Icons/OpenIdDisabled19.png"/>
+			Login available<br/>
+			<img class="inlineicon" alt="" src="/Resources/Icons/OpenId19.png"/>
+			Login not available
+		</p>
+
+		<h3>OpenID URL</h3>
+
+		<p class="note">Specify your OpenID URL here.</p>
+
+		<p>
+			<input type="text" id="openIdUrl" size="20"/>
+		</p>
+
+		<h3>Element id list</h3>
+
+		<p class="note">If an input element is found with any of these id's, the
+			OpenID URL will be filled in there and the closest form will be submitted.</p>
+
+		<p><input type="text" value="" id="newElement">
+			<a id='add-element'><img id="addButton" src="/Resources/Icons/add.png"
+			                         alt="Add"
+			                         title="Add"/></a>
+			<br/>
+			<select id="elementBox" multiple size="5"></select>
+			<a id='remove-element'><img id="removeButton"
+			                            src="/Resources/Icons/delete.png"
+			                            alt="Remove selected" title="Remove selected"/></a>
+		</p>
+	</section>
+</div>
+<script type="text/javascript" src="/Resources/JavaScript/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="/Resources/JavaScript/Options.js"></script>
+</body>
+</html>
