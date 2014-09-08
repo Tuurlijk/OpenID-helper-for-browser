@@ -5,7 +5,7 @@ The OpenID helper enables you to login to a website without a single click.
 
 How to install this extension?
 ------------------------------
-More info and the Chrome extension key will follow . . .
+Go to the [Google Chrome Web Store](https://chrome.google.com/webstore/detail/klfijofcldioojikabdjillmmpnfljbk) and click "Add to Chrome".
 
 For now you can just
 * Clone the repository
