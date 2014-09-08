@@ -1,7 +1,7 @@
 {
     "extensionDescription": {
         "description": "The description of the extension",
-        "message": "OpenID enables you to login to a website with a single click."
+        "message": "The OpenID helper enables you to login to a website with a single click."
     },
     "extensionName": {
         "description": "The name of the extension",
