@@ -23,6 +23,10 @@ jQuery(document).ready(function ($) {
         }
         $('#openIdUrl').val(openIdUrl);
 
+        if (localStorage.autoSubmit === 'true') {
+            $('#autoSubmit').prop('checked', 'true');
+        }
+
         if (elements) {
             elements = JSON.parse(elements);
             for (i = 0; i < elements.length; i += 1) {
@@ -37,6 +41,8 @@ jQuery(document).ready(function ($) {
             i;
 
         localStorage.openIdUrl = $('#openIdUrl').val();
+
+        localStorage.autoSubmit = $('#autoSubmit').is(':checked');
 
         for (i = 0; i < elementBox.length; i += 1) {
             elements.push(elementBox.options[i].value);
@@ -63,6 +69,9 @@ jQuery(document).ready(function ($) {
         save_options();
     }
 
+    $('#autoSubmit').change(function () {
+        save_options();
+    });
 
     $('#openIdUrl').keyup(function () {
         save_options();

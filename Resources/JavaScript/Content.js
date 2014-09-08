@@ -40,7 +40,8 @@ var OpenId = (function () {
     var exposed = {
         // Handles messages from other extension parts
         messageListener: function (request, sender, sendResponse) {
-            var result,
+            var autoSubmit,
+                result,
                 elements,
                 openIdUrl;
 
@@ -52,9 +53,13 @@ var OpenId = (function () {
                 elements = request.elements;
             }
 
+            if (request.autoSubmit !== '') {
+                autoSubmit = request.autoSubmit;
+            }
+
             // Execute the requested command
             if (request.cmd === 'isElementPresent') {
-                result = exposed.isElementPresent(elements);
+                result = exposed.isElementPresent(autoSubmit, elements, openIdUrl);
             } else if (request.cmd === 'loginWithOpenId') {
                 result = exposed.loginWithOpenId(elements, openIdUrl);
             }
@@ -64,8 +69,14 @@ var OpenId = (function () {
         },
 
         // Check if elements are present
-        isElementPresent: function (elements) {
-            return isElementPresent(elements);
+        isElementPresent: function (autoSubmit, elements, openIdUrl) {
+            var status;
+            if (autoSubmit) {
+                status = exposed.loginWithOpenId(elements, openIdUrl);
+            } else {
+                status = isElementPresent(elements);
+            }
+            return status;
         },
 
         // Login with OpenID
@@ -78,7 +89,7 @@ var OpenId = (function () {
             if (form !== null) {
                 form.submit();
             }
-            return form;
+            return true;
         }
 
     };

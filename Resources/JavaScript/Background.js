@@ -33,29 +33,30 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     }
 
     // Prep some variables
-    var elements = [],
+    var autoSubmit,
+        elements = [],
         openIdUrl = '';
 
     // Check if localStorage is available and get the settings out of it
     if (localStorage) {
         if (localStorage.elements) {
+            autoSubmit = localStorage.autoSubmit;
             openIdUrl = localStorage.openIdUrl;
             elements = JSON.parse(localStorage.elements);
         }
     }
 
+    autoSubmit = (autoSubmit === 'true');
+
     // Show the pageAction
     chrome.pageAction.show(tabId);
-
-    var bkg = chrome.extension.getBackgroundPage();
-    bkg.console.log(openIdUrl);
-    bkg.console.log(elements);
 
     // Request the current status and update the icon accordingly
     chrome.tabs.sendMessage(
         tabId,
         {
             cmd: 'isElementPresent',
+            autoSubmit: autoSubmit,
             elements: elements,
             openIdUrl: openIdUrl
         },
@@ -69,29 +70,34 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
 chrome.pageAction.onClicked.addListener(function (tab) {
     'use strict';
-    var elements = [],
+    var autoSubmit,
+        elements = [],
         openIdUrl = '';
 
     // Check if localStorage is available and get the settings out of it
     if (localStorage) {
         if (localStorage.openIdUrl) {
+            autoSubmit = localStorage.autoSubmit;
             openIdUrl = localStorage.openIdUrl;
             elements = JSON.parse(localStorage.elements);
         }
     }
+
+    autoSubmit = (autoSubmit === 'true');
 
     // Request the current status and update the icon accordingly
     chrome.tabs.sendMessage(
         tab.id,
         {
             cmd: 'loginWithOpenId',
+            autoSubmit: autoSubmit,
             elements: elements,
             openIdUrl: openIdUrl
         },
         function (response) {
             if (response.status !== undefined) {
-                var bkg = chrome.extension.getBackgroundPage();
-                bkg.console.log(response);
+                //var bkg = chrome.extension.getBackgroundPage();
+                //bkg.console.log(response);
             }
         }
     );
