@@ -83,11 +83,15 @@ var OpenId = (function () {
         loginWithOpenId: function (elements, openIdUrl) {
             var element,
                 elementId = isElementPresent(elements),
+                form;
+            // Check if element is present before finding a parent
+            if (elementId !== false) {
                 form = findClosestFormElement(elementId);
-            element = document.getElementById(elementId);
-            element.value = openIdUrl;
-            if (form !== null) {
-                form.submit();
+                element = document.getElementById(elementId);
+                element.value = openIdUrl;
+                if (form !== null) {
+                    form.submit();
+                }
             }
             return true;
         }
