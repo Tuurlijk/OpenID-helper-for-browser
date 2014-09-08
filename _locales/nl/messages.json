@@ -1,7 +1,7 @@
 {
     "extensionDescription": {
         "description": "The description of the extension",
-        "message": "OpenID maakt het mogelijk om in te loggen met een klik."
+        "message": "OpenID maakt het mogelijk om in te loggen zonder een klik."
     },
     "extensionName": {
         "description": "The name of the extension",

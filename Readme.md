@@ -1,7 +1,7 @@
 OpenID Helper for Google Chrome
 ===============================
 
-The OpenID helper enables you to login to a website with a single click.
+The OpenID helper enables you to login to a website without a single click.
 
 How to install this extension?
 ------------------------------
