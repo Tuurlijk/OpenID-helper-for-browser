@@ -48,8 +48,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
     autoSubmit = (autoSubmit === 'true');
 
-    // Show the pageAction
-    chrome.pageAction.show(tabId);
+    if (elements.length === 0) {
+        return;
+    }
 
     // Request the current status and update the icon accordingly
     chrome.tabs.sendMessage(
@@ -62,6 +63,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         },
         function (response) {
             if (response.status !== false) {
+                // Show the pageAction
+                chrome.pageAction.show(tabId);
                 updateIcon(tabId);
             }
         }
