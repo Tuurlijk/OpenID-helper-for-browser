@@ -1,7 +1,7 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global chrome, document, localStorage, safari, SAFARI, openTab, DS, localize */
+/*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
 
 function updateIcon(tabId) {
     'use strict';
@@ -9,13 +9,13 @@ function updateIcon(tabId) {
         image = 'OpenId';
 
     // Update title
-    chrome.pageAction.setTitle({
+    browser.pageAction.setTitle({
         tabId: tabId,
         title: title
     });
 
     // Update image
-    chrome.pageAction.setIcon({
+    browser.pageAction.setIcon({
         tabId: tabId,
         path: {
             '19': '/Resources/Icons/' + image + '19.png',
@@ -24,7 +24,7 @@ function updateIcon(tabId) {
     });
 }
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     'use strict';
     // We only react on a complete load of a http(s) page,
     // only then we're sure the content.js is loaded.
@@ -53,7 +53,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     }
 
     // Request the current status and update the icon accordingly
-    chrome.tabs.sendMessage(
+    browser.tabs.sendMessage(
         tabId,
         {
             cmd: 'isElementPresent',
@@ -61,17 +61,17 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             elements: elements,
             openIdUrl: openIdUrl
         },
-        function (response) {
+        function(response) {
             if (response.status !== false) {
                 // Show the pageAction
-                chrome.pageAction.show(tabId);
+                browser.pageAction.show(tabId);
                 updateIcon(tabId);
             }
         }
     );
 });
 
-chrome.pageAction.onClicked.addListener(function (tab) {
+browser.pageAction.onClicked.addListener(function(tab) {
     'use strict';
     var autoSubmit,
         elements = [],
@@ -89,7 +89,7 @@ chrome.pageAction.onClicked.addListener(function (tab) {
     autoSubmit = (autoSubmit === 'true');
 
     // Request the current status and update the icon accordingly
-    chrome.tabs.sendMessage(
+    browser.tabs.sendMessage(
         tab.id,
         {
             cmd: 'loginWithOpenId',
@@ -97,9 +97,9 @@ chrome.pageAction.onClicked.addListener(function (tab) {
             elements: elements,
             openIdUrl: openIdUrl
         },
-        function (response) {
+        function(response) {
             if (response.status !== undefined) {
-                //var bkg = chrome.extension.getBackgroundPage();
+                //var bkg = browser.extension.getBackgroundPage();
                 //bkg.console.log(response);
             }
         }

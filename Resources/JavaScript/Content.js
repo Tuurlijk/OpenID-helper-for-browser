@@ -1,9 +1,9 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global chrome, document, safari, SAFARI, openTab, Ember, DS, localize */
+/*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
 
-var OpenId = (function () {
+var OpenId = (function() {
     'use strict';
 
     // Check if an element is present and return the id
@@ -39,7 +39,7 @@ var OpenId = (function () {
     // Public methods
     var exposed = {
         // Handles messages from other extension parts
-        messageListener: function (request, sender, sendResponse) {
+        messageListener: function(request, sender, sendResponse) {
             var autoSubmit,
                 result,
                 elements,
@@ -65,11 +65,11 @@ var OpenId = (function () {
             }
 
             // Respond with the current status
-            sendResponse({ status: result });
+            sendResponse({status: result});
         },
 
         // Check if elements are present
-        isElementPresent: function (autoSubmit, elements, openIdUrl) {
+        isElementPresent: function(autoSubmit, elements, openIdUrl) {
             var status;
             if (autoSubmit) {
                 status = exposed.loginWithOpenId(elements, openIdUrl);
@@ -80,7 +80,7 @@ var OpenId = (function () {
         },
 
         // Login with OpenID
-        loginWithOpenId: function (elements, openIdUrl) {
+        loginWithOpenId: function(elements, openIdUrl) {
             var element,
                 elementId = isElementPresent(elements),
                 form;
@@ -101,4 +101,4 @@ var OpenId = (function () {
 }());
 
 // Attach the message listener
-chrome.runtime.onMessage.addListener(OpenId.messageListener);
+browser.runtime.onMessage.addListener(OpenId.messageListener);

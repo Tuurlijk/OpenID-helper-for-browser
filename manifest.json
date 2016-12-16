@@ -1,20 +1,27 @@
 {
     "name": "__MSG_extensionName__",
-    "version": "1.1.1",
+    "version": "1.1.3",
     "manifest_version": 2,
-    "minimum_chrome_version": "18",
     "description": "__MSG_extensionDescription__",
     "homepage_url": "http://www.donationbasedhosting.org/",
     "default_locale": "en",
-    "permissions": [ "tabs", "*://*/*" ],
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage"
+    ],
     "background": {
-        "scripts": [ "Resources/JavaScript/Background.js" ],
+        "scripts": ["Resources/JavaScript/Background.js"],
         "persistent": false
     },
     "content_scripts": [
         {
-            "js": [ "Resources/JavaScript/Content.js" ],
-            "matches": [ "*://*/*" ]
+            "js": [
+                "Resources/JavaScript/Content.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
         }
     ],
     "icons": {
@@ -22,12 +29,12 @@
         "48": "Resources/Icons/Icon48.png",
         "128": "Resources/Icons/Icon128.png"
     },
-    "options_page": "Resources/HTML/Options.html",
     "page_action": {
         "default_icon": {
             "38": "Resources/Icons/OpenIdDisabled38.png",
             "19": "Resources/Icons/OpenIdDisabled19.png"
         },
         "default_title": "OpenId disabled"
-    }
+    },
+    "options_ui": {"page": "Resources/HTML/Options.html"}
 }

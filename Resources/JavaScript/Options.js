@@ -1,9 +1,9 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global chrome, document, jQuery, localStorage, safari, SAFARI, openTab, DS, localize */
+/*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
 
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function($) {
     'use strict';
 
     function addItem(id, value) {
@@ -69,11 +69,11 @@ jQuery(document).ready(function ($) {
         save_options();
     }
 
-    $('#autoSubmit').change(function () {
+    $('#autoSubmit').change(function() {
         save_options();
     });
 
-    $('#openIdUrl').keyup(function () {
+    $('#openIdUrl').keyup(function() {
         save_options();
     });
     $('#add-element').click(addElement);

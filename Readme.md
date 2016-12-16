@@ -1,20 +1,20 @@
-OpenID Helper for Google Chrome
-===============================
+OpenID Helper for Firefox
+=========================
 
 The OpenID helper enables you to login to a website without a single click.
 
 How to install this extension?
 ------------------------------
-Go to the [Google Chrome Web Store](https://chrome.google.com/webstore/detail/klfijofcldioojikabdjillmmpnfljbk) and click "Add to Chrome".
+Go to the store and click "Add to Firefox".
 
-For now you can just
+Or you can
 * Clone the repository
-* Switch the Chrome Extension manager to 'Developer Mode'
-* Load the extension by choosing 'Load unpacked extension' and choosing the cloned repository folder
+* Switch the Firefox Extension manager to 'Developer Mode'. Navigate to [`about:debugging`](about:debugging)
+* Load the extension by choosing 'Load Temporary Add-on' and choosing the cloned repository folder
 
 How do I contribute?
 --------------------
-A: [Submit issues and ideas](https://github.com/Tuurlijk/OpenID-helper-for-chrome/issues)
+A: [Submit issues and ideas](https://github.com/Tuurlijk/OpenID-helper-for-firefox/issues)
 
 B: [Submit a pull request](https://help.github.com/articles/using-pull-requests)
 
@@ -26,7 +26,6 @@ _**Pro-tip:** Make sure to build upon the latest version of the code and keep pu
 
 License
 -------
-
 This script is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for

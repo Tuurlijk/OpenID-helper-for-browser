@@ -1,10 +1,10 @@
 #navigation {
-	height: 100%;
+	height: auto;
 	left: 0;
-	margin-top: -20px;
+	margin-top: 30px;
 	position: absolute;
 	right: 15px;
-	width: 155px;
+	width: 100px;
 	z-index: 3;
 }
 
@@ -13,38 +13,43 @@
  * found in the LICENSE file. */
 
 body {
-  overflow: auto;
-  padding-top: 20px;
+	overflow: auto;
+	padding-bottom: 5px;
+	padding-top: 20px;
 }
 
 html.changing-content body {
-  -webkit-transition: -webkit-transform 100ms;
+	-webkit-transition: -webkit-transform 100ms;
+}
+
+body.uber-frame .page {
+	padding-top: 30px !important;
 }
 
 h1 {
-  -webkit-margin-after: 1em;
-  /* This value must match the top padding of the uber page header. */
-  -webkit-margin-before: 21px;
-  -webkit-margin-start: 23px;
-  color: rgb(92, 97, 102);
+	-webkit-margin-after: 1em;
+	/* This value must match the top padding of the uber page header. */
+	-webkit-margin-before: 21px;
+	-webkit-margin-start: 23px;
+	color: rgb(92, 97, 102);
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
 li:hover {
-  color: #777;
+	color: #777;
 }
 
 #navigation a.active {
-  -webkit-border-start-color: rgb(78, 87, 100);
-  cursor: default;
+	-webkit-border-start-color: rgb(78, 87, 100);
+	cursor: default;
 }
 
 #helpNavItem {
-  margin-top: 27px;
+	margin-top: 27px;
 }
 
 #navigation li {
@@ -52,6 +57,7 @@ li:hover {
 	margin: 6px 0;
 	padding: 0;
 }
+
 #navigation a {
 	display: block;
 	background-color: white;
@@ -65,6 +71,7 @@ li:hover {
 	-webkit-user-select: none;
 	cursor: pointer;
 }
+
 button {
 	background-color: white;
 	border: 0;
@@ -75,6 +82,7 @@ button {
 	margin: 6px 0;
 	padding: 0;
 }
+
 #navigation a {
 	color: #999;
 	text-decoration: none;
@@ -84,8 +92,9 @@ button {
 .active > button {
 	color: rgb(70, 78, 90);
 }
+
 .aboutImage {
-	background-color:rgba(221, 221, 221, 0.95);
+	background-color: rgba(221, 221, 221, 0.95);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#888), to(#aaa));
 	background-image: -webkit-linear-gradient(#888, #aaa);
 	background-image: linear-gradient(#888, #aaa), linear-gradient(#888, #aaa);
@@ -96,19 +105,23 @@ button {
 	box-shadow: 1px 4px 13px rgb(100, 100, 100);
 	border-radius: 2px;
 }
+
 .aboutImage img {
 	margin: 0 1px;
 }
+
 .aboutImage.right {
 	float: right;
 	clear: right;
 	margin: 0 0 15px 15px;
 }
+
 .aboutImage.left {
 	float: left;
 	clear: left;
 	margin: 15px 15px 0 0;
 }
+
 ul.features li:before {
 	color: #00aa00;
 	content: '\2714'; /* ✔ */
@@ -116,6 +129,11 @@ ul.features li:before {
 	font-size: 13px;
 	width: 20px;
 }
+
 ul.features li {
 	margin: 6px 0;
+}
+
+#elementBox {
+	width: 50%;
 }
