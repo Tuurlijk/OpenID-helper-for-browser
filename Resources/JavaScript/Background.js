@@ -1,54 +1,46 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
+/*global browser, document, localStorage, tabId, changeInfo, tab, openTab, localize */
 
+'use strict';
 function updateIcon(tabId) {
-    'use strict';
-    var title = 'Login with OpenID',
-        image = 'OpenId';
-
-    // Update title
     browser.pageAction.setTitle({
         tabId: tabId,
-        title: title
+        title: 'Login with OpenID'
     });
-
-    // Update image
     browser.pageAction.setIcon({
         tabId: tabId,
         path: {
-            '19': '/Resources/Icons/' + image + '19.png',
-            '38': '/Resources/Icons/' + image + '38.png'
+            '19': '/Resources/Icons/OpenId19.png',
+            '38': '/Resources/Icons/OpenId38.png'
         }
     });
 }
 
+function getSettings() {
+    let settings = {
+        autoSubmit: false,
+        elements: [],
+        openIdUrl: ''
+    };
+    if (localStorage.elements) {
+        settings.elements = JSON.parse(localStorage.elements);
+        settings.autoSubmit = localStorage.autoSubmit === 'true';
+        settings.openIdUrl = localStorage.openIdUrl ? localStorage.openIdUrl : '';
+    }
+    return settings;
+}
+
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    'use strict';
     // We only react on a complete load of a http(s) page,
     // only then we're sure the content.js is loaded.
     if (changeInfo.status !== 'complete' || tab.url.indexOf('http') !== 0) {
         return;
     }
 
-    // Prep some variables
-    var autoSubmit,
-        elements = [],
-        openIdUrl = '';
-
-    // Check if localStorage is available and get the settings out of it
-    if (localStorage) {
-        if (localStorage.elements) {
-            autoSubmit = localStorage.autoSubmit;
-            openIdUrl = localStorage.openIdUrl;
-            elements = JSON.parse(localStorage.elements);
-        }
-    }
-
-    autoSubmit = (autoSubmit === 'true');
-
-    if (elements.length === 0) {
+    let settings = getSettings();
+    if (settings.elements.length === 0) {
         return;
     }
 
@@ -56,12 +48,11 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     browser.tabs.sendMessage(
         tabId,
         {
-            cmd: 'isElementPresent',
-            autoSubmit: autoSubmit,
-            elements: elements,
-            openIdUrl: openIdUrl
+            cmd: 'getFirstMatchingElement',
+            settings: settings
         },
         function(response) {
+            console.log(response.status);
             if (response.status !== false) {
                 // Show the pageAction
                 browser.pageAction.show(tabId);
@@ -72,30 +63,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 browser.pageAction.onClicked.addListener(function(tab) {
-    'use strict';
-    var autoSubmit,
-        elements = [],
-        openIdUrl = '';
-
-    // Check if localStorage is available and get the settings out of it
-    if (localStorage) {
-        if (localStorage.openIdUrl) {
-            autoSubmit = localStorage.autoSubmit;
-            openIdUrl = localStorage.openIdUrl;
-            elements = JSON.parse(localStorage.elements);
-        }
-    }
-
-    autoSubmit = (autoSubmit === 'true');
-
     // Request the current status and update the icon accordingly
     browser.tabs.sendMessage(
         tab.id,
         {
             cmd: 'loginWithOpenId',
-            autoSubmit: autoSubmit,
-            elements: elements,
-            openIdUrl: openIdUrl
+            settings: getSettings()
         },
         function(response) {
             if (response.status !== undefined) {

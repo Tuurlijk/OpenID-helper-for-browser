@@ -6,24 +6,21 @@
 var OpenId = (function() {
     'use strict';
 
-    // Check if an element is present and return the id
-    function isElementPresent(arr) {
-        var element,
-            i;
-        for (i = 0; i < arr.length; i += 1) {
-            element = document.getElementById(arr[i]);
+    // Get first element if present
+    function getFirstMatchingElement(selectors) {
+        let element, i;
+        for (i = 0; i < selectors.length; i += 1) {
+            element = document.querySelector(selectors[i]);
             if (element !== null) {
-                return arr[i];
+                return element;
             }
         }
         return false;
     }
 
     // Find closest form element
-    function findClosestFormElement(id) {
-        var element = document.getElementById(id),
-            formElement = null,
-            formFound = false;
+    function findClosestFormElement(element) {
+        let formElement = null, formFound = false;
         while (!formFound) {
             element = element.parentNode;
             if (element.tagName.toLowerCase() === 'form') {
@@ -36,68 +33,40 @@ var OpenId = (function() {
         return formElement;
     }
 
+    // Login with OpenID
+    function loginWithOpenId(selectors, openIdUrl) {
+        let element = getFirstMatchingElement(selectors), form;
+        // Check if element is present before finding a parent
+        if (element !== false) {
+            form = findClosestFormElement(element);
+            element.value = openIdUrl;
+            if (form !== null) {
+                form.submit();
+            }
+        }
+        return true;
+    }
+
     // Public methods
-    var exposed = {
+    return {
         // Handles messages from other extension parts
         messageListener: function(request, sender, sendResponse) {
-            var autoSubmit,
-                result,
-                elements,
-                openIdUrl;
-
-            if (request.openIdUrl !== '') {
-                openIdUrl = request.openIdUrl;
-            }
-
-            if (request.elements !== '') {
-                elements = request.elements;
-            }
-
-            if (request.autoSubmit !== '') {
-                autoSubmit = request.autoSubmit;
-            }
+            let settings = request.settings, result;
 
             // Execute the requested command
-            if (request.cmd === 'isElementPresent') {
-                result = exposed.isElementPresent(autoSubmit, elements, openIdUrl);
+            if (request.cmd === 'getFirstMatchingElement') {
+                result = getFirstMatchingElement(settings.elements);
+                if (settings.autoSubmit && result) {
+                    result = loginWithOpenId(settings.elements, settings.openIdUrl);
+                }
             } else if (request.cmd === 'loginWithOpenId') {
-                result = exposed.loginWithOpenId(elements, openIdUrl);
+                result = loginWithOpenId(settings.elements, settings.openIdUrl);
             }
 
             // Respond with the current status
             sendResponse({status: result});
-        },
-
-        // Check if elements are present
-        isElementPresent: function(autoSubmit, elements, openIdUrl) {
-            var status;
-            if (autoSubmit) {
-                status = exposed.loginWithOpenId(elements, openIdUrl);
-            } else {
-                status = isElementPresent(elements);
-            }
-            return status;
-        },
-
-        // Login with OpenID
-        loginWithOpenId: function(elements, openIdUrl) {
-            var element,
-                elementId = isElementPresent(elements),
-                form;
-            // Check if element is present before finding a parent
-            if (elementId !== false) {
-                form = findClosestFormElement(elementId);
-                element = document.getElementById(elementId);
-                element.value = openIdUrl;
-                if (form !== null) {
-                    form.submit();
-                }
-            }
-            return true;
         }
-
     };
-    return exposed;
 }());
 
 // Attach the message listener

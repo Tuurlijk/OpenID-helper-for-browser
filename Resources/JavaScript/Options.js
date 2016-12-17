@@ -7,20 +7,17 @@ jQuery(document).ready(function($) {
     'use strict';
 
     function addItem(id, value) {
-        var opt = document.createElement('option');
-        document.getElementById(id).options.add(opt);
+        let opt = document.createElement('option');
+        document.querySelector('#' + id).options.add(opt);
         opt.value = value;
         opt.text = value;
     }
 
     function restore_options() {
-        var openIdUrl = localStorage.openIdUrl,
+        let openIdUrl = localStorage.openIdUrl,
             elements = localStorage.elements,
             i;
 
-        if (!openIdUrl) {
-            openIdUrl = 'http://example.com/exampleuser';
-        }
         $('#openIdUrl').val(openIdUrl);
 
         if (localStorage.autoSubmit === 'true') {
@@ -29,14 +26,14 @@ jQuery(document).ready(function($) {
 
         if (elements) {
             elements = JSON.parse(elements);
-            for (i = 0; i < elements.length; i += 1) {
-                addItem('elementBox', elements[i]);
-            }
+            elements.forEach(function(element) {
+                addItem('elementBox', element);
+            });
         }
     }
 
     function save_options() {
-        var elementBox = document.getElementById('elementBox'),
+        let elementBox = document.querySelector('#elementBox'),
             elements = [],
             i;
 
@@ -51,15 +48,15 @@ jQuery(document).ready(function($) {
     }
 
     function addElement() {
-        var elementText = document.getElementById('newElement').value;
+        let elementText = document.querySelector('#newElement').value;
         addItem('elementBox', elementText);
         save_options();
-        document.getElementById('newElement').value = '';
+        document.querySelector('#newElement').value = '';
         save_options();
     }
 
     function removeSelectedElement() {
-        var elementBox = document.getElementById('elementBox'),
+        let elementBox = document.querySelector('#elementBox'),
             i;
         for (i = elementBox.length - 1; i >= 0; i -= 1) {
             if (elementBox.options[i].selected) {
