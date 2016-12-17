@@ -1,37 +1,5 @@
-#navigation {
-	height: auto;
-	left: 0;
-	margin-top: 30px;
-	position: absolute;
-	right: 15px;
-	width: 100px;
-	z-index: 3;
-}
-
-/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be
- * found in the LICENSE file. */
-
-body {
-	overflow: auto;
-	padding-bottom: 5px;
-	padding-top: 20px;
-}
-
 html.changing-content body {
 	-webkit-transition: -webkit-transform 100ms;
-}
-
-body.uber-frame .page {
-	padding-top: 30px !important;
-}
-
-h1 {
-	-webkit-margin-after: 1em;
-	/* This value must match the top padding of the uber page header. */
-	-webkit-margin-before: 21px;
-	-webkit-margin-start: 23px;
-	color: rgb(92, 97, 102);
 }
 
 ul {
@@ -55,7 +23,8 @@ li:hover {
 #navigation li {
 	line-height: 17px;
 	margin: 6px 0;
-	padding: 0;
+	padding-right: 1.5em;
+	display: inline-block;
 }
 
 #navigation a {
@@ -135,5 +104,31 @@ ul.features li {
 }
 
 #elementBox {
-	width: 50%;
+	width: 95%;
+}
+
+label {
+	cursor: default;
+	margin-top: 1px;
+	margin-bottom: 2px;
+	margin-inline-start: 6px;
+	margin-inline-end: 5px;
+}
+
+label[disabled="true"] {
+	color: GrayText;
+}
+
+.detail-row {
+	padding: 10px 0;
+}
+
+.option-description {
+	float: left;
+	width: 35%;
+	display: inline-block;
+}
+
+.option-value {
+	display: inline-block;
 }

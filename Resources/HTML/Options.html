@@ -2,58 +2,61 @@
 <head>
 	<title i18n-content="optionsPageTitle">OpenID Options.</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="/Resources/CSS/chrome_shared.css"/>
-	<link rel="stylesheet" href="/Resources/CSS/uber_frame.css"/>
+	<link rel="stylesheet" href="/Resources/CSS/textbox.css"/>
+	<link rel="stylesheet" href="/Resources/CSS/common.css"/>
+	<link rel="stylesheet" href="/Resources/CSS/extensions.css"/>
 	<link rel="stylesheet" href="/Resources/CSS/Options.css"/>
 </head>
-<body class="uber-frame" style="font-family: 'Lucida Grande', sans-serif; font-size: 75%;">
-<div id="navigation">
-	<ul>
-		<li>
-			<a href="Options.html" class="active"><span i18n-content="optionsDisplayName">Options</span></a>
-		</li>
-		<li>
-			<a href="About.html"><span i18n-content="aboutDisplayName">About</span></a>
-		</li>
-	</ul>
-</div>
+<body>
+<ul id="navigation">
+	<li>
+		<a href="Options.html" class="active"><span i18n-content="optionsDisplayName">Options</span></a>
+	</li>
+	<li>
+		<a href="About.html"><span i18n-content="aboutDisplayName">About</span></a>
+	</li>
+</ul>
 <div class="page">
-	<header>
-		<h1 i18n-content="optionsTitle">Options</h1>
-	</header>
 	<section>
 		<p>
-			Login using OpenID by clicking the OpenID icon in the addressbar:
-			<img class="inlineicon" alt="" src="/Resources/Icons/OpenId19.png"/>
+			Login using OpenID by clicking the OpenID icon in the addressbar: <img class="inlineicon" alt="" src="/Resources/Icons/OpenId19.png"/>
 		</p>
 
-		<h3>OpenID URL</h3>
+		<div class="detail-row">
+			<div class="option-description">
+				<label class="preferences-label" for="openIdUrl">OpenID URL</label>
+				<p class="detail-row-label preferences-description">Specify your OpenID URL here.</p>
+			</div>
+			<div class="option-value">
+				<input type="text" id="openIdUrl" size="40" placeholder="https://example.com/openidserver/users/you"/>
+			</div>
+		</div>
 
-		<p class="note">Specify your OpenID URL here.</p>
-
-		<p>
-			<input type="text" id="openIdUrl" size="20" placeholder="https://example.com/openidserver/users/you"/>
-		</p>
-
-		<h3>Element id list</h3>
-
-		<p class="note">If an input element is found with any of these selectors, the
-			OpenID URL will be filled in there and the closest form will be submitted.</p>
-
-		<p><input type="text" value="" id="newElement" placeholder="#openid_url">
-			<a id='add-element'><img id="addButton" src="/Resources/Icons/add.png"
-			                         alt="Add"
-			                         title="Add"/></a>
-			<br/>
-			<select id="elementBox" multiple size="5"></select>
-			<a id='remove-element'><img id="removeButton"
-			                            src="/Resources/Icons/delete.png"
-			                            alt="Remove selected" title="Remove selected"/></a>
-		</p>
-
-		<h3>Auto-Submit</h3>
-
-		<p><input type="checkbox" id="autoSubmit"/> <label for="autoSubmit">Automatically submit the form if the selector was found.</label></p>
+		<div class="detail-row">
+			<div class="option-description">
+				<label class="preferences-label" for="newElement">Element selector list</label>
+				<p class="preferences-description">If an input element is found with any of these selectors, the OpenID URL will be filled in there and the closest form will be submitted.</p>
+			</div>
+			<div class="option-value">
+				<input type="text" value="" size="40" id="newElement" placeholder="#openid_url">
+				<a id='add-element'><img id="addButton" src="/Resources/Icons/add.png"
+				                         alt="Add"
+				                         title="Add"/></a>
+				<br/>
+				<select id="elementBox" multiple size="5"></select>
+				<a id='remove-element'><img id="removeButton"
+				                            src="/Resources/Icons/delete.png"
+				                            alt="Remove selected" title="Remove selected"/></a>
+			</div>
+		</div>
+		<div class="detail-row">
+			<div class="option-description">
+				<label class="preferences-label">Auto-Submit</label>
+			</div>
+			<div class="option-value">
+				<input type="checkbox" id="autoSubmit"/>
+				<label for="autoSubmit">Automatically submit the form if the selector was found.</label></div>
+		</div>
 	</section>
 </div>
 <script type="text/javascript" src="/Resources/JavaScript/jquery-2.0.0.min.js"></script>
