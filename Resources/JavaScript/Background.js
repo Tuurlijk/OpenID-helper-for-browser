@@ -18,13 +18,25 @@ function updateIcon(tabId) {
     });
 }
 
+function isBlacklisted(blacklist, tab) {
+    if (blacklist.length === 0) {
+        return false;
+    }
+    return blacklist.some(function(domain) {
+        var regex = new RegExp('https?:\/\/' + domain);
+        return (tab.url.match(regex) === null);
+    });
+}
+
 function getSettings() {
     let settings = {
         autoSubmit: false,
         elements: [],
+        blacklist: [],
         openIdUrl: ''
     };
     if (localStorage.elements) {
+        settings.blacklist = JSON.parse(localStorage.blacklist);
         settings.elements = JSON.parse(localStorage.elements);
         settings.autoSubmit = localStorage.autoSubmit === 'true';
         settings.openIdUrl = localStorage.openIdUrl ? localStorage.openIdUrl : '';
@@ -40,7 +52,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     }
 
     let settings = getSettings();
-    if (settings.elements.length === 0) {
+    if (settings.elements.length === 0 || isBlacklisted(settings.blacklist, tab)) {
         return;
     }
 
@@ -52,7 +64,6 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             settings: settings
         },
         function(response) {
-            console.log(response.status);
             if (response.status !== false) {
                 // Show the pageAction
                 browser.pageAction.show(tabId);
@@ -69,12 +80,6 @@ browser.pageAction.onClicked.addListener(function(tab) {
         {
             cmd: 'loginWithOpenId',
             settings: getSettings()
-        },
-        function(response) {
-            if (response.status !== undefined) {
-                //var bkg = browser.extension.getBackgroundPage();
-                //bkg.console.log(response);
-            }
         }
     );
 });
