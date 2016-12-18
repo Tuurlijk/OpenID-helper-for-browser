@@ -145,29 +145,30 @@ label[disabled="true"] {
 	padding: 1px 7px;
 	margin: 0 8px 0 0;
 	text-align: left;
-	text-decoration: none
+	text-decoration: none;
 }
 
 .aui-label, a.aui-label {
-	color: #3572b0
+	color: #3572b0;
 }
 
 span.aui-label {
-	color: #484848
+	color: #484848;
 }
 
 .aui-label.aui-label-closeable.aui-label-split:hover, a.aui-label:active, a.aui-label:focus, a.aui-label:hover {
 	border-color: #707070;
-	text-decoration: none
+	text-decoration: none;
 }
 
 .aui-label-split .aui-label-split-main:active, .aui-label-split .aui-label-split-main:focus, .aui-label-split .aui-label-split-main:hover {
-	text-decoration: none
+	text-decoration: none;
 }
 
 .aui-label.aui-label-closeable {
 	padding-right: 18px;
-	position: relative
+	position: relative;
+	margin-bottom: 0.5em;
 }
 
 .aui-label-closeable .aui-icon-close {
@@ -193,7 +194,7 @@ span.aui-label {
 	text-align: left;
 	text-indent: -999em;
 	vertical-align: text-bottom;
-	width: 16px
+	width: 16px;
 }
 
 .hidden {
