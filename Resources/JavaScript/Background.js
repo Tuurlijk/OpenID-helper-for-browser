@@ -24,7 +24,7 @@ function isBlacklisted(blacklist, tab) {
     }
     return blacklist.some(function(domain) {
         var regex = new RegExp('https?:\/\/' + domain);
-        return (tab.url.match(regex) === null);
+        return (tab.url.match(regex) !== null);
     });
 }
 
