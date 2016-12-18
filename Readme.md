@@ -30,6 +30,3 @@ This script is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 more details.
-
-Some of the icons used are the famous [Famfamfam icons from Mark James](http://www.famfamfam.com/lab/icons/silk/)
-licensed under the [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/).
