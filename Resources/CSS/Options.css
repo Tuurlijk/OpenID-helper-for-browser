@@ -128,6 +128,7 @@ label[disabled="true"] {
 	flex: 1;
 }
 
+#domains,
 #selectors {
 	padding: 8px 0;
 }

@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     'use strict';
 
     function restore_options() {
-        let selectors = localStorage.elements;
+        let blacklist = localStorage.blacklist,
+            selectors = localStorage.elements;
 
         document.getElementById('openIdUrl').value = localStorage.openIdUrl;
 
@@ -15,31 +16,40 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('autoSubmit').checked = true;
         }
 
+        if (blacklist) {
+            blacklist = JSON.parse(blacklist);
+            blacklist.forEach(function(domain) {
+                addElement(domain, 'newDomain', 'domains');
+            });
+        }
         if (selectors) {
             selectors = JSON.parse(selectors);
             selectors.forEach(function(selector) {
-                addSelector(selector);
+                addElement(selector, 'newSelector', 'selectors');
             });
         }
     }
 
     function save_options() {
-        let selectorBox = document.getElementById('selectors'),
+        let blacklist = [],
             elements = [];
 
         localStorage.openIdUrl = document.getElementById('openIdUrl').value;
         localStorage.autoSubmit = document.getElementById('autoSubmit').checked;
 
-        if (selectorBox) {
-            selectorBox.childNodes.forEach(function(selector){
-                elements.push(selector.innerText);
-            });
-        }
+        document.getElementById('domains').childNodes.forEach(function(domain) {
+            blacklist.push(domain.innerText);
+        });
+        localStorage.blacklist = JSON.stringify(blacklist);
+
+        document.getElementById('selectors').childNodes.forEach(function(selector) {
+            elements.push(selector.innerText);
+        });
         localStorage.elements = JSON.stringify(elements);
     }
 
-    function addSelector(selector = '') {
-        if (selector === '') {
+    function addElement(element = '', newElementId, containerID) {
+        if (element === '') {
             return;
         }
 
@@ -47,34 +57,42 @@ document.addEventListener("DOMContentLoaded", function() {
             label = document.createElement('span'),
             elementText;
 
-        elementText = document.createTextNode(selector);
+        elementText = document.createTextNode(element);
         closeButton.classList.add('aui-icon', 'aui-icon-close');
         label.classList.add('aui-label', 'aui-label-closeable');
         label.appendChild(elementText);
         label.appendChild(closeButton);
 
-        document.getElementById('selectors').appendChild(label);
+        document.getElementById(containerID).appendChild(label);
         closeButton.addEventListener('click', function(event) {
-            removeSelector(event.target.parentNode);
+            removeElement(event.target.parentNode);
         });
 
-        document.getElementById('newSelector').value = '';
+        document.getElementById(newElementId).value = '';
         save_options();
     }
 
-    function removeSelector(element) {
+    function removeElement(element) {
         element.remove();
         save_options();
     }
 
     document.getElementById('autoSubmit').addEventListener('change', save_options);
     document.getElementById('openIdUrl').addEventListener('keyup', save_options);
-    document.getElementById('add-element').addEventListener('click', function() {
-        addSelector(document.getElementById('newSelector').value);
+    document.getElementById('addDomain').addEventListener('click', function() {
+        addElement(document.getElementById('newDomain').value, 'newDomain', 'domains');
+    });
+    document.getElementById('addSelector').addEventListener('click', function() {
+        addElement(document.getElementById('newSelector').value, 'newSelector', 'selectors');
     });
     document.getElementById('newSelector').addEventListener('keyup', function(event) {
         if (event.keyCode === 13) {
-            addSelector(event.target.value);
+            addElement(event.target.value, 'newSelector', 'selectors');
+        }
+    });
+    document.getElementById('newDomain').addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) {
+            addElement(event.target.value, 'newDomain', 'domains');
         }
     });
     restore_options();
