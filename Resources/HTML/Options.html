@@ -33,19 +33,14 @@
 
 		<div class="detail-row">
 			<div class="option-description">
-				<label class="preferences-label" for="newElement">Element selector list</label>
-				<p class="preferences-description">If an input element is found with any of these selectors, the OpenID URL will be filled in there and the closest form will be submitted.</p>
+				<label class="preferences-label" for="newSelector">Element selectors</label>
+				<p class="preferences-description">Any input element found with these <a href="https://developer.mozilla.org/nl/docs/Web/API/Document/querySelector" target="_blank">selectors</a>, will be filled with the OpenID url.
+				</p>
 			</div>
 			<div class="option-value">
-				<input type="text" value="" size="40" id="newElement" placeholder="#openid_url">
-				<a id='add-element'><img id="addButton" src="/Resources/Icons/add.png"
-				                         alt="Add"
-				                         title="Add"/></a>
-				<br/>
-				<select id="elementBox" multiple size="5"></select>
-				<a id='remove-element'><img id="removeButton"
-				                            src="/Resources/Icons/delete.png"
-				                            alt="Remove selected" title="Remove selected"/></a>
+				<input type="text" value="" size="10" id="newSelector" placeholder="#openid_url">
+				<button class="addon-control" id='add-element'>Add</button>
+				<div id="selectors"></div>
 			</div>
 		</div>
 		<div class="detail-row">
@@ -54,11 +49,11 @@
 			</div>
 			<div class="option-value">
 				<input type="checkbox" id="autoSubmit"/>
-				<label for="autoSubmit">Automatically submit the form if the selector was found.</label></div>
+				<label for="autoSubmit" class="radio">Automatically submit the form if a matching input element was found.</label>
+			</div>
 		</div>
 	</section>
 </div>
-<script type="text/javascript" src="/Resources/JavaScript/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="/Resources/JavaScript/Options.js"></script>
 </body>
 </html>

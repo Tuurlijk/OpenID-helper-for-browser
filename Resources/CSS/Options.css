@@ -41,17 +41,6 @@ li:hover {
 	cursor: pointer;
 }
 
-button {
-	background-color: white;
-	border: 0;
-	color: #999;
-	cursor: pointer;
-	font: inherit;
-	line-height: 17px;
-	margin: 6px 0;
-	padding: 0;
-}
-
 #navigation a {
 	color: #999;
 	text-decoration: none;
@@ -115,20 +104,98 @@ label {
 	margin-inline-end: 5px;
 }
 
+input[type="checkbox"] + label.radio {
+	line-height: 1.5em;
+}
+
 label[disabled="true"] {
 	color: GrayText;
 }
 
 .detail-row {
 	padding: 10px 0;
+	display: flex;
 }
 
 .option-description {
 	float: left;
 	width: 35%;
 	display: inline-block;
+	padding-right: 0.5em;
 }
 
 .option-value {
+	flex: 1;
+}
+
+#selectors {
+	padding: 8px 0;
+}
+
+/*! AUI Label -> https://docs.atlassian.com/aui/latest/docs/labels.html */
+.aui-label {
+	background: #edf0ff;
+	border: 1px solid #ccc;
+	border-radius: 8px;
 	display: inline-block;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	padding: 1px 7px;
+	margin: 0 8px 0 0;
+	text-align: left;
+	text-decoration: none
+}
+
+.aui-label, a.aui-label {
+	color: #3572b0
+}
+
+span.aui-label {
+	color: #484848
+}
+
+.aui-label.aui-label-closeable.aui-label-split:hover, a.aui-label:active, a.aui-label:focus, a.aui-label:hover {
+	border-color: #707070;
+	text-decoration: none
+}
+
+.aui-label-split .aui-label-split-main:active, .aui-label-split .aui-label-split-main:focus, .aui-label-split .aui-label-split-main:hover {
+	text-decoration: none
+}
+
+.aui-label.aui-label-closeable {
+	padding-right: 18px;
+	position: relative
+}
+
+.aui-label-closeable .aui-icon-close {
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAKUlEQVQI12NgYFj0nwEKwKxF/9P+Q4TgLAgDIQEVQuJiCKBpwWoosrUAzbg31XT4p6QAAAAASUVORK5CYII=') 0 0 no-repeat;
+	cursor: pointer;
+	display: block;
+	float: right;
+	height: 8px;
+	position: absolute;
+	right: 5px;
+	top: 4px;
+	width: 8px
+}
+
+.aui-icon {
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	border: none;
+	display: inline-block;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	text-indent: -999em;
+	vertical-align: text-bottom;
+	width: 16px
+}
+
+.hidden {
+	height: 0;
+	visibility: hidden;
 }

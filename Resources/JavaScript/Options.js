@@ -3,78 +3,79 @@
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
 /*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
 
-jQuery(document).ready(function($) {
+document.addEventListener("DOMContentLoaded", function() {
     'use strict';
 
-    function addItem(id, value) {
-        let opt = document.createElement('option');
-        document.querySelector('#' + id).options.add(opt);
-        opt.value = value;
-        opt.text = value;
-    }
-
     function restore_options() {
-        let openIdUrl = localStorage.openIdUrl,
-            elements = localStorage.elements,
-            i;
+        let selectors = localStorage.elements;
 
-        $('#openIdUrl').val(openIdUrl);
+        document.getElementById('openIdUrl').value = localStorage.openIdUrl;
 
         if (localStorage.autoSubmit === 'true') {
-            $('#autoSubmit').prop('checked', 'true');
+            document.getElementById('autoSubmit').checked = true;
         }
 
-        if (elements) {
-            elements = JSON.parse(elements);
-            elements.forEach(function(element) {
-                addItem('elementBox', element);
+        if (selectors) {
+            selectors = JSON.parse(selectors);
+            selectors.forEach(function(selector) {
+                addSelector(selector);
             });
         }
     }
 
     function save_options() {
-        let elementBox = document.querySelector('#elementBox'),
-            elements = [],
-            i;
+        let selectorBox = document.getElementById('selectors'),
+            elements = [];
 
-        localStorage.openIdUrl = $('#openIdUrl').val();
+        localStorage.openIdUrl = document.getElementById('openIdUrl').value;
+        localStorage.autoSubmit = document.getElementById('autoSubmit').checked;
 
-        localStorage.autoSubmit = $('#autoSubmit').is(':checked');
-
-        for (i = 0; i < elementBox.length; i += 1) {
-            elements.push(elementBox.options[i].value);
+        if (selectorBox) {
+            selectorBox.childNodes.forEach(function(selector){
+                elements.push(selector.innerText);
+            });
         }
         localStorage.elements = JSON.stringify(elements);
     }
 
-    function addElement() {
-        let elementText = document.querySelector('#newElement').value;
-        addItem('elementBox', elementText);
-        save_options();
-        document.querySelector('#newElement').value = '';
-        save_options();
-    }
-
-    function removeSelectedElement() {
-        let elementBox = document.querySelector('#elementBox'),
-            i;
-        for (i = elementBox.length - 1; i >= 0; i -= 1) {
-            if (elementBox.options[i].selected) {
-                elementBox.remove(i);
-            }
+    function addSelector(selector = '') {
+        if (selector === '') {
+            return;
         }
+
+        let closeButton = document.createElement('span'),
+            label = document.createElement('span'),
+            elementText;
+
+        elementText = document.createTextNode(selector);
+        closeButton.classList.add('aui-icon', 'aui-icon-close');
+        label.classList.add('aui-label', 'aui-label-closeable');
+        label.appendChild(elementText);
+        label.appendChild(closeButton);
+
+        document.getElementById('selectors').appendChild(label);
+        closeButton.addEventListener('click', function(event) {
+            removeSelector(event.target.parentNode);
+        });
+
+        document.getElementById('newSelector').value = '';
         save_options();
     }
 
-    $('#autoSubmit').change(function() {
+    function removeSelector(element) {
+        element.remove();
         save_options();
-    });
+    }
 
-    $('#openIdUrl').keyup(function() {
-        save_options();
+    document.getElementById('autoSubmit').addEventListener('change', save_options);
+    document.getElementById('openIdUrl').addEventListener('keyup', save_options);
+    document.getElementById('add-element').addEventListener('click', function() {
+        addSelector(document.getElementById('newSelector').value);
     });
-    $('#add-element').click(addElement);
-    $('#remove-element').click(removeSelectedElement);
-    $('#save-options').click(save_options);
+    document.getElementById('newSelector').addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) {
+            addSelector(event.target.value);
+        }
+    });
     restore_options();
 });
