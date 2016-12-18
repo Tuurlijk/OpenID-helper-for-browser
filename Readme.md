@@ -10,7 +10,7 @@ Go to [the store](https://addons.mozilla.org/en-US/firefox/addon/openid-helper/)
 Options
 -------
 
-![](Image/OpenID-Options.png)
+![](Resources/Images/OpenID-Options.png)
 
 How do I contribute?
 --------------------
