@@ -23,7 +23,7 @@ function isBlacklisted(blacklist, tab) {
         return false;
     }
     return blacklist.some(function(domain) {
-        var regex = new RegExp('https?:\/\/' + domain);
+        let regex = new RegExp('https?:\/\/' + domain);
         return (tab.url.match(regex) !== null);
     });
 }

@@ -3,7 +3,7 @@
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
 /*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
 
-var OpenId = (function() {
+let OpenId = (function() {
     'use strict';
 
     // Get first element if present

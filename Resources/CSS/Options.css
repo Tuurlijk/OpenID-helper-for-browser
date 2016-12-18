@@ -171,15 +171,15 @@ span.aui-label {
 }
 
 .aui-label-closeable .aui-icon-close {
-	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAKUlEQVQI12NgYFj0nwEKwKxF/9P+Q4TgLAgDIQEVQuJiCKBpwWoosrUAzbg31XT4p6QAAAAASUVORK5CYII=') 0 0 no-repeat;
 	cursor: pointer;
 	display: block;
 	float: right;
-	height: 8px;
+	height: 16px;
 	position: absolute;
-	right: 5px;
-	top: 4px;
-	width: 8px
+	right: 0px;
+	top: 0px;
+	width: 20px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAKUlEQVQI12NgYFj0nwEKwKxF/9P+Q4TgLAgDIQEVQuJiCKBpwWoosrUAzbg31XT4p6QAAAAASUVORK5CYII=') no-repeat 6px 4px;
 }
 
 .aui-icon {
