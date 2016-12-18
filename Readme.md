@@ -3,14 +3,14 @@ OpenID Helper for Firefox
 
 The OpenID helper enables you to login to a website without a single click.
 
-How to install this extension?
+Installation
 ------------------------------
-Go to the store and click "Add to Firefox".
+Go to [the store](https://addons.mozilla.org/en-US/firefox/addon/openid-helper/) and click "Add to Firefox".
 
-Or you can
-* Clone the repository
-* Switch the Firefox Extension manager to 'Developer Mode'. Navigate to [`about:debugging`](about:debugging)
-* Load the extension by choosing 'Load Temporary Add-on' and choosing the cloned repository folder
+Options
+-------
+
+![](Image/OpenID-Options.png)
 
 How do I contribute?
 --------------------
