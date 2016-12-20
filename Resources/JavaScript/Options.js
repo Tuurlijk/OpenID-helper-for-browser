@@ -77,10 +77,6 @@ document.addEventListener("DOMContentLoaded", function() {
         save_options();
     }
 
-    if (typeof chrome !== "undefined") {
-        document.querySelector('body').classList.add('chromeOptionBody');
-    }
-
     document.getElementById('autoSubmit').addEventListener('change', save_options);
     document.getElementById('openIdUrl').addEventListener('keyup', save_options);
     document.getElementById('addDomain').addEventListener('click', function() {

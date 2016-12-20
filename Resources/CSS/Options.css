@@ -3,6 +3,10 @@ html body.chromeOptionBody {
 	padding: 1em;
 }
 
+html body.chromeOptionBody label.radio span{
+	margin-left: 0.5em;
+}
+
 html.changing-content body {
 	-webkit-transition: -webkit-transform 100ms;
 }
