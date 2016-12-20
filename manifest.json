@@ -36,5 +36,6 @@
         },
         "default_title": "OpenId disabled"
     },
-    "options_ui": {"page": "Resources/HTML/Options.html"}
+    "options_ui": {"page": "Resources/HTML/Options.html"},
+    "options_page": "Resources/HTML/Options.html"
 }

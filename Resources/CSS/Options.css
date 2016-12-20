@@ -1,3 +1,8 @@
+html body.chromeOptionBody {
+	min-width: 640px;
+	padding: 1em;
+}
+
 html.changing-content body {
 	-webkit-transition: -webkit-transform 100ms;
 }

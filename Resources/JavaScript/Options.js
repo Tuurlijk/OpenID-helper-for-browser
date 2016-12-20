@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let blacklist = localStorage.blacklist,
             selectors = localStorage.elements;
 
-        document.getElementById('openIdUrl').value = localStorage.openIdUrl;
+        document.getElementById('openIdUrl').value = localStorage.openIdUrl || '';
 
         if (localStorage.autoSubmit === 'true') {
             document.getElementById('autoSubmit').checked = true;
@@ -75,6 +75,10 @@ document.addEventListener("DOMContentLoaded", function() {
     function removeElement(element) {
         element.remove();
         save_options();
+    }
+
+    if (typeof chrome !== "undefined") {
+        document.querySelector('body').classList.add('chromeOptionBody');
     }
 
     document.getElementById('autoSubmit').addEventListener('change', save_options);
