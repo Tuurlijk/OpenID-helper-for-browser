@@ -1,9 +1,13 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global browser, document, localStorage, tabId, changeInfo, tab, openTab, localize */
+/*global browser, chrome, document, localStorage, tabId, changeInfo, tab, openTab, localize */
 
 'use strict';
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 function updateIcon(tabId) {
     browser.pageAction.setTitle({
         tabId: tabId,

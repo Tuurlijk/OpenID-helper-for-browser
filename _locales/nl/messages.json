@@ -39,43 +39,6 @@
         "description": "Section title of Display Options",
         "message": "Weergave opties"
     },
-    "optionsShowHeaderInformation": {
-        "description": "___Show header information___ in the [screen position]",
-        "message": "Toon header informatie"
-    },
-    "optionsInThe": {
-        "description": "Show header information _in the_ [screen position]",
-        "message": ""
-    },
-    "optionsIn": {
-        "description": "Show header information _in the_ [screen position]",
-        "message": "in"
-    },
-    "optionsMode": {
-        "description": "Show header information in [render mode] in the [screen position]",
-        "message": "weergave"
-    },
-    "optionsCornerFor": {
-        "description": "Show header information in the [screen position] ___corner for___ [seconds] seconds.",
-        "message": "en verberg na"
-    },
-    "optionsSeconds": {
-        "description": "Show header information in the [screen position] corner for [seconds] ___seconds___.",
-        "message": "seconden"
-    },
-    "optionsUseThe": {
-        "description": "___Use the___ [theme] theme.",
-        "message": "Gebruik een"
-    },
-    "optionsColorTheme": {
-        "description": "Use the [theme] ___theme___.",
-        "message": "kleurenschema"
-    },
-    "optionsSectionContentAboutOpenId": {
-        "description": "Section of text describing OpenID",
-        "message": "OpenID maakt het mogelijk om de request en response headers te inspecteren direct nadat een pagina geladen is. De headers verschijnen in een venster bovenop de geladen pagina en verdwijnen naar een ingestelde tijd. Er is een normale weergave die alle header informatie toont en een micro weergave die alleen de opgegeven response headers toont."
-
-    },
     "optionsSectionContentAboutMe" : {
         "description": "Section of text describing Me",
         "message": "Mijn naam is Michiel Roos. Ik vond het leuk om OpenID te ontwikkelen. Ik heb er een boel van geleerd. Ik hoop dat je hem nuttig vind en hem gebruikt met plezier. Als je suggesties of opbouwende kritiek hebt, neem dan contact met me op. Als je blij bent met OpenID, zou je dan een willekeurig bedrag willen doneren?"
@@ -87,29 +50,5 @@
     "optionsSectionTitleAboutMe": {
         "description": "Section title of About Me",
         "message": "Over Mij"
-    },
-    "optionsSectionTitleWhatDoesItDo": {
-        "description": "Section title of What does it do?",
-        "message": "Wat doet het?"
-    },
-    "optionsSectionTitleFilters": {
-        "description": "Section title of Filters",
-        "message": "Filters"
-    },
-    "optionsLabelHideRequestHeaders": {
-        "description": "Label for hide request headers input field",
-        "message": "Verberg request headers"
-    },
-    "optionsLabelHideResponseHeaders": {
-        "description": "Label for hide response headers input field",
-        "message": "Verberg response headers"
-    },
-    "optionsLabelShowResponseHeaders": {
-        "description": "Label for show response headers (in micro mode) input field",
-        "message": "Toon response headers (voor micro weergave)"
-    },
-    "optionsLabelShowResults": {
-        "description": "Label for show results input field",
-        "message": "Toon resultaten"
     }
 }

@@ -1,7 +1,11 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
+/*global browser, chrome, document, localStorage, safari, SAFARI, openTab, DS, localize */
+
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
 
 let OpenId = (function() {
     'use strict';
