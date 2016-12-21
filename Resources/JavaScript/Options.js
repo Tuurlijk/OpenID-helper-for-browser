@@ -1,12 +1,60 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, globalstrict: true,
  latedef:true, noarg:true, noempty:true, nonew:true, undef:true, maxlen:256,
  strict:true, trailing:true, boss:true, browser:true, devel:true, jquery:true */
-/*global browser, document, localStorage, safari, SAFARI, openTab, DS, localize */
+/*global browser, document, localStorage, safari, SAARI, openTab, DS, localize */
+
+'use strict';
 
 document.addEventListener("DOMContentLoaded", function() {
-    'use strict';
 
-    function restore_options() {
+    function saveOptions() {
+        let blacklist = [],
+            elements = [];
+
+        localStorage.openIdUrl = document.getElementById('openIdUrl').value;
+        localStorage.autoSubmit = document.getElementById('autoSubmit').checked;
+
+        document.getElementById('domains').childNodes.forEach(function(domain) {
+            blacklist.push(domain.innerText);
+        });
+        localStorage.blacklist = JSON.stringify(blacklist);
+
+        document.getElementById('selectors').childNodes.forEach(function(selector) {
+            elements.push(selector.innerText);
+        });
+        localStorage.elements = JSON.stringify(elements);
+    }
+
+    function removeElement(element) {
+        element.remove();
+        saveOptions();
+    }
+
+    function addElement(element, newElementId, containerID) {
+        if (element === '') {
+            return;
+        }
+
+        let closeButton = document.createElement('span'),
+            label = document.createElement('span'),
+            elementText;
+
+        elementText = document.createTextNode(element);
+        closeButton.classList.add('aui-icon', 'aui-icon-close');
+        label.classList.add('aui-label', 'aui-label-closeable');
+        label.appendChild(elementText);
+        label.appendChild(closeButton);
+
+        document.getElementById(containerID).appendChild(label);
+        closeButton.addEventListener('click', function(event) {
+            removeElement(event.target.parentNode);
+        });
+
+        document.getElementById(newElementId).value = '';
+        saveOptions();
+    }
+
+    function restoreOptions() {
         let blacklist = localStorage.blacklist,
             selectors = localStorage.elements;
 
@@ -30,55 +78,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function save_options() {
-        let blacklist = [],
-            elements = [];
-
-        localStorage.openIdUrl = document.getElementById('openIdUrl').value;
-        localStorage.autoSubmit = document.getElementById('autoSubmit').checked;
-
-        document.getElementById('domains').childNodes.forEach(function(domain) {
-            blacklist.push(domain.innerText);
-        });
-        localStorage.blacklist = JSON.stringify(blacklist);
-
-        document.getElementById('selectors').childNodes.forEach(function(selector) {
-            elements.push(selector.innerText);
-        });
-        localStorage.elements = JSON.stringify(elements);
-    }
-
-    function addElement(element = '', newElementId, containerID) {
-        if (element === '') {
-            return;
-        }
-
-        let closeButton = document.createElement('span'),
-            label = document.createElement('span'),
-            elementText;
-
-        elementText = document.createTextNode(element);
-        closeButton.classList.add('aui-icon', 'aui-icon-close');
-        label.classList.add('aui-label', 'aui-label-closeable');
-        label.appendChild(elementText);
-        label.appendChild(closeButton);
-
-        document.getElementById(containerID).appendChild(label);
-        closeButton.addEventListener('click', function(event) {
-            removeElement(event.target.parentNode);
-        });
-
-        document.getElementById(newElementId).value = '';
-        save_options();
-    }
-
-    function removeElement(element) {
-        element.remove();
-        save_options();
-    }
-
-    document.getElementById('autoSubmit').addEventListener('change', save_options);
-    document.getElementById('openIdUrl').addEventListener('keyup', save_options);
+    document.getElementById('autoSubmit').addEventListener('change', saveOptions);
+    document.getElementById('openIdUrl').addEventListener('keyup', saveOptions);
     document.getElementById('addDomain').addEventListener('click', function() {
         addElement(document.getElementById('newDomain').value, 'newDomain', 'domains');
     });
@@ -95,5 +96,5 @@ document.addEventListener("DOMContentLoaded", function() {
             addElement(event.target.value, 'newDomain', 'domains');
         }
     });
-    restore_options();
+    restoreOptions();
 });
