@@ -33,19 +33,12 @@ function isBlacklisted(blacklist, tab) {
 }
 
 function getSettings() {
-    let settings = {
-        autoSubmit: false,
-        elements: [],
-        blacklist: [],
-        openIdUrl: ''
+    return {
+        autoSubmit: localStorage.autoSubmit ? localStorage.autoSubmit === 'true' : false,
+        elements: localStorage.elements ? JSON.parse(localStorage.elements) : [],
+        blacklist: localStorage.blacklist ? JSON.parse(localStorage.blacklist) : [],
+        openIdUrl: localStorage.openIdUrl ? localStorage.openIdUrl : ''
     };
-    if (localStorage.elements) {
-        settings.blacklist = JSON.parse(localStorage.blacklist);
-        settings.elements = JSON.parse(localStorage.elements);
-        settings.autoSubmit = localStorage.autoSubmit === 'true';
-        settings.openIdUrl = localStorage.openIdUrl ? localStorage.openIdUrl : '';
-    }
-    return settings;
 }
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -69,7 +62,6 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         },
         function(response) {
             if (response.status !== false) {
-                // Show the pageAction
                 browser.pageAction.show(tabId);
                 updateIcon(tabId);
             }
