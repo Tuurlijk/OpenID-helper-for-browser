@@ -5,7 +5,7 @@
     },
     "extensionName": {
         "description": "The name of the extension",
-        "message": "OpenID"
+        "message": "OpenID helper"
     },
     "optionsDisplayName": {
         "description": "Menu title for options.",
