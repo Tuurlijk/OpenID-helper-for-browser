@@ -1,6 +1,5 @@
 General:
-- Localization
-- Finish Options page
+- Localization?
 
 Done:
 ✔ All the rest ;-)
