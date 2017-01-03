@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.autoSubmit = document.getElementById('autoSubmit').checked;
 
         document.getElementById('domains').childNodes.forEach(function(domain) {
-            blacklist.push(domain.innerText);
+            blacklist.push(domain.textContent);
         });
         localStorage.blacklist = JSON.stringify(blacklist);
 
         document.getElementById('selectors').childNodes.forEach(function(selector) {
-            elements.push(selector.innerText);
+            elements.push(selector.textContent);
         });
         localStorage.elements = JSON.stringify(elements);
     }
